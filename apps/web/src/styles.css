@@ -575,3 +575,125 @@ form.panel .btn {
     transition: none !important;
   }
 }
+
+/* ---------- Selector de modo ---------- */
+
+.mode-switch {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4px;
+  margin-bottom: 18px;
+  padding: 4px;
+  border-radius: 14px;
+  background: rgba(0, 0, 0, 0.3);
+}
+
+.mode-switch button {
+  padding: 10px 8px;
+  border: 0;
+  border-radius: 10px;
+  background: none;
+  color: var(--ink-soft);
+  font: inherit;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.mode-switch button[aria-checked='true'] {
+  background: rgba(242, 193, 78, 0.18);
+  color: var(--gold);
+  box-shadow: 0 0 0 1px rgba(242, 193, 78, 0.5) inset;
+}
+
+/* ---------- Pantallas táctiles y angostas ---------- */
+
+html {
+  -webkit-text-size-adjust: 100%;
+}
+
+.table,
+.overlay,
+.start {
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+}
+
+@media (hover: none) {
+  .card.interactive:hover:not(.selected) {
+    transform: none;
+  }
+}
+
+@media (max-width: 600px) {
+  .table {
+    /* En el celular la mano ocupa su propia fila: cinco cartas a lo ancho. */
+    --base: clamp(44px, min(15.5vw, 8.4vh), 72px);
+    gap: 8px;
+    padding: 8px;
+  }
+
+  .seat {
+    padding: 6px 8px 8px;
+  }
+
+  .seat-row {
+    gap: 8px 18px;
+  }
+
+  .seat-me .hand {
+    flex-basis: 100%;
+    margin-top: 4px;
+  }
+
+  .seat-me .hand-cards {
+    justify-content: center;
+  }
+
+  .center {
+    gap: 10px;
+  }
+
+  .ladders {
+    gap: 2px;
+  }
+
+  .ladder {
+    padding: 4px;
+  }
+
+  .status {
+    border-radius: 16px;
+    font-size: 0.85rem;
+  }
+
+  .zone-label,
+  .zone-sub {
+    font-size: 0.64rem;
+  }
+}
+
+@media (max-width: 600px) {
+  /* El mazo pasa a una franja compacta para que la mano no quede fuera de pantalla. */
+  .stock {
+    --card-w: calc(var(--base) * 0.5);
+    --card-h: calc(var(--card-w) * 1.4);
+    flex-basis: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .stock .zone-label,
+  .stock .zone-sub {
+    margin: 0;
+  }
+
+  .pile {
+    --step: min(calc(var(--card-h) * 0.23), calc(var(--card-h) * 1.4 / max(var(--n) - 1, 1)));
+  }
+
+  .piles-row {
+    min-height: calc(var(--card-h) * 1.5);
+  }
+}

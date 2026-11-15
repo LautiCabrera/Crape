@@ -5,4 +5,4 @@ export { applyAction } from './actions';
 export { getLegalActions } from './legal';
 export { getPlayerView, redactEvent } from './view';
 export type { PlayerView, PublicPlayerView } from './view';
-export { greedyBot } from './bot';
+export { cpuBot, greedyBot } from './bot';

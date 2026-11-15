@@ -2,14 +2,18 @@ import { useState } from 'react';
 import type { FormEvent } from 'react';
 import { Table } from './components/Table';
 import { useLocalGame } from './useLocalGame';
+import type { GameMode } from './useLocalGame';
+
+const CPU_NAME = 'Bot';
 
 export function App() {
   const game = useLocalGame();
-  const { view, names } = game;
+  const { view, names, mode } = game;
 
-  if (!view) return <StartScreen initialNames={names} onStart={game.start} />;
+  if (!view) return <StartScreen onStart={game.start} />;
 
   const isFirstTurn = view.turnNumber === 1;
+  const status = view.status;
   return (
     <>
       <Table
@@ -21,7 +25,7 @@ export function App() {
         onQuit={game.quit}
       />
 
-      {game.handoff && view.status.kind === 'playing' ? (
+      {game.handoff && status.kind === 'playing' ? (
         <div className="overlay opaque" role="dialog" aria-modal="true">
           <div className="panel">
             <p className="eyebrow">{isFirstTurn ? 'Empieza la partida' : 'Cambio de turno'}</p>
@@ -38,24 +42,25 @@ export function App() {
         </div>
       ) : null}
 
-      {view.status.kind !== 'playing' ? (
+      {status.kind !== 'playing' ? (
         <div className="overlay" role="dialog" aria-modal="true">
           <div className="panel">
-            {view.status.kind === 'won' ? (
+            <p className="eyebrow">Partida terminada</p>
+            {status.kind === 'won' ? (
               <>
-                <p className="eyebrow">Partida terminada</p>
-                <h2>¡Ganó {names[view.status.winner]}!</h2>
-                <p>Vació su pozo en {view.turnNumber} turnos.</p>
+                <h2>
+                  {mode === 'cpu' && status.winner === view.viewer ? '¡Ganaste!' : `¡Ganó ${names[status.winner]}!`}
+                </h2>
+                <p>El pozo quedó vacío en {view.turnNumber} turnos.</p>
               </>
             ) : (
               <>
-                <p className="eyebrow">Partida terminada</p>
                 <h2>Partida bloqueada</h2>
                 <p>Se agotó el mazo y ningún jugador puede seguir. No hay ganador.</p>
               </>
             )}
             <div className="panel-actions">
-              <button type="button" className="btn primary" autoFocus onClick={() => game.start(names)}>
+              <button type="button" className="btn primary" autoFocus onClick={() => game.start(mode, names)}>
                 Jugar otra
               </button>
               <button type="button" className="btn" onClick={game.quit}>
@@ -69,33 +74,47 @@ export function App() {
   );
 }
 
-interface StartScreenProps {
-  initialNames: [string, string];
-  onStart: (names: [string, string]) => void;
-}
-
-function StartScreen({ initialNames, onStart }: StartScreenProps) {
-  const [first, setFirst] = useState(initialNames[0]);
-  const [second, setSecond] = useState(initialNames[1]);
+function StartScreen({ onStart }: { onStart: (mode: GameMode, names: [string, string]) => void }) {
+  const [mode, setMode] = useState<GameMode>('cpu');
+  const [first, setFirst] = useState('');
+  const [second, setSecond] = useState('');
 
   function submit(event: FormEvent) {
     event.preventDefault();
-    onStart([first.trim() || 'Jugador 1', second.trim() || 'Jugador 2']);
+    if (mode === 'cpu') onStart('cpu', [first.trim() || 'Vos', CPU_NAME]);
+    else onStart('hotseat', [first.trim() || 'Jugador 1', second.trim() || 'Jugador 2']);
   }
 
   return (
     <main className="start">
       <form className="panel" onSubmit={submit}>
         <h1>Crape</h1>
-        <p>Dos jugadores, un dispositivo. Gana quien vacía primero su pozo de 11 cartas.</p>
+        <p>Gana quien vacía primero su pozo de 11 cartas.</p>
+
+        <div className="mode-switch" role="radiogroup" aria-label="Modo de juego">
+          <button type="button" role="radio" aria-checked={mode === 'cpu'} onClick={() => setMode('cpu')}>
+            Contra un bot
+          </button>
+          <button type="button" role="radio" aria-checked={mode === 'hotseat'} onClick={() => setMode('hotseat')}>
+            Dos jugadores
+          </button>
+        </div>
+
         <label>
-          Jugador 1
-          <input value={first} maxLength={20} onChange={(e) => setFirst(e.target.value)} />
+          {mode === 'cpu' ? 'Tu nombre' : 'Jugador 1'}
+          <input
+            value={first}
+            maxLength={20}
+            placeholder={mode === 'cpu' ? 'Vos' : 'Jugador 1'}
+            onChange={(e) => setFirst(e.target.value)}
+          />
         </label>
-        <label>
-          Jugador 2
-          <input value={second} maxLength={20} onChange={(e) => setSecond(e.target.value)} />
-        </label>
+        {mode === 'hotseat' ? (
+          <label>
+            Jugador 2
+            <input value={second} maxLength={20} placeholder="Jugador 2" onChange={(e) => setSecond(e.target.value)} />
+          </label>
+        ) : null}
         <button type="submit" className="btn primary">
           Nueva partida
         </button>
