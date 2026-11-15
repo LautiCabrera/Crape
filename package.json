@@ -1,0 +1,14 @@
+{
+  "name": "crape",
+  "private": true,
+  "workspaces": [
+    "packages/*",
+    "apps/*"
+  ],
+  "scripts": {
+    "dev": "npm run dev -w @crape/web",
+    "test": "npm run test --workspaces --if-present",
+    "typecheck": "npm run typecheck --workspaces --if-present",
+    "simulate": "npm run simulate -w @crape/engine --"
+  }
+}
