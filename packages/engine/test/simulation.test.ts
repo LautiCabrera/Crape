@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { applyAction, cpuBot, createGame, getLegalActions, greedyBot } from '../src';
+import { applyAction, BOTS, createGame, getLegalActions, greedyBot } from '../src';
 import { nextRandom } from '../src/rng';
 import { checkInvariants } from './helpers';
 
@@ -28,8 +28,8 @@ describe('partidas completas con bots', () => {
     }
   });
 
-  it('el bot rival solo elige acciones válidas y sus partidas terminan', () => {
-    for (let seed = 1; seed <= 100; seed++) {
+  it.each(Object.entries(BOTS))('el bot de nivel %s solo elige acciones válidas y sus partidas terminan', (_, bot) => {
+    for (let seed = 1; seed <= 60; seed++) {
       let state = createGame(seed);
       let rng = seed;
       const random = () => {
@@ -39,7 +39,7 @@ describe('partidas completas con bots', () => {
       };
       let steps = 0;
       while (state.status.kind === 'playing') {
-        const result = applyAction(state, state.currentPlayer, cpuBot(state, state.currentPlayer, random));
+        const result = applyAction(state, state.currentPlayer, bot(state, state.currentPlayer, random));
         if (!result.ok) throw new Error(`Semilla ${seed}: el bot eligió una acción inválida (${result.error})`);
         state = result.state;
         checkInvariants(state, 108);

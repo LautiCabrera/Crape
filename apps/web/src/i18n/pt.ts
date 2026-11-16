@@ -1,0 +1,116 @@
+import type { Dictionary } from './es';
+
+export const pt: Dictionary = {
+  tagline: 'Ganha quem esvaziar primeiro o seu monte de 11 cartas.',
+  botName: 'Bot',
+  you: 'Você',
+  player1: 'Jogador 1',
+  player2: 'Jogador 2',
+  yourName: 'Seu nome',
+  newGame: 'Nova partida',
+
+  mode: {
+    label: 'Modo de jogo',
+    bot: 'Contra um bot',
+    hotseat: 'Dois jogadores',
+  },
+
+  difficulty: {
+    label: 'Dificuldade do bot',
+    easy: 'Fácil',
+    normal: 'Normal',
+    hard: 'Difícil',
+  },
+
+  settings: {
+    title: 'Configurações',
+    close: 'Fechar',
+    language: 'Idioma',
+    help: 'Ajuda de jogadas',
+    helpFull: 'Completa',
+    helpTargets: 'Só destinos',
+    helpNone: 'Sem ajuda',
+    helpFullHint: 'Marca as cartas que têm jogada e destaca os destinos válidos.',
+    helpTargetsHint: 'Destaca os destinos válidos ao selecionar uma carta, sem marcar quais têm jogada.',
+    helpNoneHint: 'Não marca nem destaca nada: você tenta um destino e a mesa diz se é válido.',
+    botSpeed: 'Velocidade do bot',
+    slow: 'Lenta',
+    normal: 'Normal',
+    fast: 'Rápida',
+    confirmDiscard: 'Confirmar antes de descartar',
+    confirmDiscardHint: 'Pede um segundo toque na pilha, porque descartar encerra o turno e não pode ser desfeito.',
+  },
+
+  table: {
+    center: 'Centro da mesa',
+    zoneOf: (name) => `Área de ${name}`,
+    inTurn: 'Na vez',
+    pozo: 'Monte',
+    discards: 'Descartes',
+    hand: (count) => `Mão · ${count}`,
+    yourHand: (count) => `Sua mão · ${count}`,
+    stock: (count) => `Baralho · ${count}`,
+    setAside: (count) => `Separadas · ${count}`,
+    next: (rank) => `Segue ${rank}`,
+    newLadder: 'Nova sequência',
+    pass: 'Passar a vez',
+    quit: 'Sair',
+    cardsInPozo: (count) => `${count} cartas no monte`,
+    cardsInHand: (count) => `${count} cartas na mão`,
+    playOnLadder: (rank) => `Jogar na sequência que segue com ${rank}`,
+    startLadder: 'Iniciar uma nova sequência',
+    discardOnPile: (pile) => `Descartar na pilha ${pile}`,
+    pile: (pile) => `Pilha de descarte ${pile}`,
+  },
+
+  status: {
+    turnOf: (name) => `Vez de ${name}`,
+    start: 'Selecione uma carta e depois o destino.',
+    playOrDiscard: 'Jogue-a em uma sequência destacada, ou descarte-a em uma das suas pilhas para encerrar o turno.',
+    chooseLadder: 'Escolha a sequência destacada onde quer jogá-la.',
+    choosePile: 'Escolha uma das suas pilhas de descarte: descartar encerra o seu turno.',
+    chooseDestination: 'Escolha uma sequência para jogá-la, ou uma das suas pilhas para descartá-la e encerrar o turno.',
+    confirmDiscard: 'Toque de novo na mesma pilha para confirmar: descartar encerra o seu turno.',
+    noMoves: 'Essa carta não tem jogadas disponíveis agora.',
+    aceFirst: 'Você tem um Ás disponível: é preciso jogá-lo antes de fazer outra coisa com essa carta.',
+    aceForced: 'Você tem um Ás disponível: é obrigatório jogá-lo.',
+    canPass: 'Você não tem cartas na mão nem baralho para comprar: jogue o que puder ou passe a vez.',
+    invalid: 'Essa jogada não é válida.',
+  },
+
+  events: {
+    ladderCompleted: 'Sequência completa! As cartas ficam separadas até o baralho acabar.',
+    stockReshuffled: 'O baralho acabou: as sequências completas foram embaralhadas para continuar comprando.',
+    pozoRevealed: 'Uma nova carta do monte foi revelada.',
+    handRefilled: 'Mão vazia: novas cartas são compradas e o turno continua.',
+  },
+
+  handoff: {
+    gameStarts: 'A partida começa',
+    turnChange: 'Troca de turno',
+    starterRule: 'Começa quem tem a carta visível do monte mais alta; em caso de empate, sorteia-se.',
+    passDevice: 'Passe o dispositivo. A mão só aparece ao continuar.',
+    iAm: (name) => `Sou ${name}, continuar`,
+  },
+
+  end: {
+    over: 'Partida encerrada',
+    youWon: 'Você ganhou!',
+    won: (name) => `${name} ganhou!`,
+    emptiedIn: (turns) => `O monte foi esvaziado em ${turns} turnos.`,
+    blocked: 'Partida bloqueada',
+    blockedText: 'O baralho acabou e nenhum jogador pode continuar. Não há vencedor.',
+    again: 'Jogar outra',
+    home: 'Voltar ao início',
+  },
+
+  cards: {
+    joker: 'Curinga',
+    hearts: 'copas',
+    diamonds: 'ouros',
+    clubs: 'paus',
+    spades: 'espadas',
+    name: (rank, suit) => `${rank} de ${suit}`,
+    standsFor: (rank) => `vale ${rank}`,
+  },
+};

@@ -5,4 +5,5 @@ export { applyAction } from './actions';
 export { getLegalActions } from './legal';
 export { getPlayerView, redactEvent } from './view';
 export type { PlayerView, PublicPlayerView } from './view';
-export { cpuBot, greedyBot } from './bot';
+export { BOTS, easyBot, greedyBot, hardBot, normalBot } from './bot';
+export type { Bot, BotLevel } from './bot';

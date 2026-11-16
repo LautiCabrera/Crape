@@ -1,5 +1,6 @@
 import type { Card } from '@crape/engine';
 import type { CSSProperties, KeyboardEvent } from 'react';
+import { useT } from '../i18n';
 import { cardName, RANK_LABEL, SUIT_SYMBOL } from '../labels';
 
 /** Props para volver interactivo un elemento que no es un botón nativo. */
@@ -22,7 +23,7 @@ export function clickable(onClick: (() => void) | undefined, label?: string) {
 interface CardViewProps {
   card: Card;
   selected?: boolean;
-  /** La carta tiene algún movimiento disponible. */
+  /** Marca la carta como jugable (solo con la ayuda completa). */
   playable?: boolean;
   /** Anima la carta como recién dada vuelta. */
   reveal?: boolean;
@@ -33,6 +34,7 @@ interface CardViewProps {
 }
 
 export function CardView({ card, selected, playable, reveal, standsFor, onClick, style }: CardViewProps) {
+  const t = useT();
   const isRed = card.kind === 'standard' && (card.suit === 'hearts' || card.suit === 'diamonds');
   const className = [
     'card',
@@ -47,7 +49,7 @@ export function CardView({ card, selected, playable, reveal, standsFor, onClick,
 
   // El nombre único permite que el navegador anime la carta de una zona a otra.
   const fullStyle = { ...style, viewTransitionName: `c-${card.id}` } as CSSProperties;
-  const label = cardName(card) + (standsFor ? ` (vale ${RANK_LABEL[standsFor]})` : '');
+  const label = cardName(card, t) + (standsFor ? ` (${t.cards.standsFor(RANK_LABEL[standsFor]!)})` : '');
 
   return (
     <div

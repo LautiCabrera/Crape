@@ -1,0 +1,116 @@
+import type { Dictionary } from './es';
+
+export const en: Dictionary = {
+  tagline: 'The first player to empty their 11-card stockpile wins.',
+  botName: 'Bot',
+  you: 'You',
+  player1: 'Player 1',
+  player2: 'Player 2',
+  yourName: 'Your name',
+  newGame: 'New game',
+
+  mode: {
+    label: 'Game mode',
+    bot: 'Against a bot',
+    hotseat: 'Two players',
+  },
+
+  difficulty: {
+    label: 'Bot difficulty',
+    easy: 'Easy',
+    normal: 'Normal',
+    hard: 'Hard',
+  },
+
+  settings: {
+    title: 'Settings',
+    close: 'Close',
+    language: 'Language',
+    help: 'Move hints',
+    helpFull: 'Full',
+    helpTargets: 'Targets only',
+    helpNone: 'No hints',
+    helpFullHint: 'Marks the cards that can be played and highlights valid targets.',
+    helpTargetsHint: 'Highlights valid targets once you select a card, without marking which cards can be played.',
+    helpNoneHint: 'Nothing is marked or highlighted: you try a target and the table tells you if it is valid.',
+    botSpeed: 'Bot speed',
+    slow: 'Slow',
+    normal: 'Normal',
+    fast: 'Fast',
+    confirmDiscard: 'Confirm before discarding',
+    confirmDiscardHint: 'Asks for a second tap on the pile, since discarding ends your turn and cannot be undone.',
+  },
+
+  table: {
+    center: 'Center of the table',
+    zoneOf: (name) => `${name}'s area`,
+    inTurn: 'Playing',
+    pozo: 'Stockpile',
+    discards: 'Discards',
+    hand: (count) => `Hand · ${count}`,
+    yourHand: (count) => `Your hand · ${count}`,
+    stock: (count) => `Deck · ${count}`,
+    setAside: (count) => `Set aside · ${count}`,
+    next: (rank) => `Next: ${rank}`,
+    newLadder: 'New run',
+    pass: 'Pass turn',
+    quit: 'Quit',
+    cardsInPozo: (count) => `${count} cards in the stockpile`,
+    cardsInHand: (count) => `${count} cards in hand`,
+    playOnLadder: (rank) => `Play on the run that needs ${rank}`,
+    startLadder: 'Start a new run',
+    discardOnPile: (pile) => `Discard onto pile ${pile}`,
+    pile: (pile) => `Discard pile ${pile}`,
+  },
+
+  status: {
+    turnOf: (name) => `${name}'s turn`,
+    start: 'Select a card, then where to put it.',
+    playOrDiscard: 'Play it on a highlighted run, or discard it onto one of your piles to end your turn.',
+    chooseLadder: 'Choose the highlighted run to play it on.',
+    choosePile: 'Choose one of your discard piles: discarding ends your turn.',
+    chooseDestination: 'Choose a run to play it on, or one of your piles to discard it and end your turn.',
+    confirmDiscard: 'Tap the same pile again to confirm: discarding ends your turn.',
+    noMoves: 'That card has no moves available right now.',
+    aceFirst: 'You have an Ace available: it must be played before doing anything else with that card.',
+    aceForced: 'You have an Ace available: playing it is mandatory.',
+    canPass: 'You have no cards in hand and no deck to draw from: play what you can or pass.',
+    invalid: 'That move is not valid.',
+  },
+
+  events: {
+    ladderCompleted: 'Run complete! Its cards are set aside until the deck runs out.',
+    stockReshuffled: 'The deck ran out: the completed runs were shuffled to keep drawing.',
+    pozoRevealed: 'A new stockpile card was revealed.',
+    handRefilled: 'Empty hand: new cards are drawn and the turn continues.',
+  },
+
+  handoff: {
+    gameStarts: 'The game begins',
+    turnChange: 'Next turn',
+    starterRule: 'The player with the highest visible stockpile card goes first; ties are decided at random.',
+    passDevice: 'Pass the device. Their hand is shown only after continuing.',
+    iAm: (name) => `I'm ${name}, continue`,
+  },
+
+  end: {
+    over: 'Game over',
+    youWon: 'You won!',
+    won: (name) => `${name} won!`,
+    emptiedIn: (turns) => `The stockpile was emptied in ${turns} turns.`,
+    blocked: 'Game blocked',
+    blockedText: 'The deck ran out and neither player can continue. There is no winner.',
+    again: 'Play again',
+    home: 'Back to start',
+  },
+
+  cards: {
+    joker: 'Joker',
+    hearts: 'hearts',
+    diamonds: 'diamonds',
+    clubs: 'clubs',
+    spades: 'spades',
+    name: (rank, suit) => `${rank} of ${suit}`,
+    standsFor: (rank) => `stands for ${rank}`,
+  },
+};
