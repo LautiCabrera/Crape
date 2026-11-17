@@ -1,14 +1,13 @@
 {
   "name": "crape",
+  "version": "0.1.0",
   "private": true,
-  "workspaces": [
-    "packages/*",
-    "apps/*"
-  ],
+  "packageManager": "pnpm@11.5.2",
   "scripts": {
-    "dev": "npm run dev -w @crape/web",
-    "test": "npm run test --workspaces --if-present",
-    "typecheck": "npm run typecheck --workspaces --if-present",
-    "simulate": "npm run simulate -w @crape/engine --"
+    "dev": "pnpm --filter @crape/web dev",
+    "build": "pnpm --filter @crape/web build",
+    "test": "pnpm -r --if-present test",
+    "typecheck": "pnpm -r --if-present typecheck",
+    "simulate": "pnpm --filter @crape/engine simulate"
   }
 }
