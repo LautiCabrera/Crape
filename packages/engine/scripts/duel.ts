@@ -1,6 +1,6 @@
 /**
  * Enfrenta dos bots entre sí, alternando asientos.
- * Uso: npx tsx scripts/duel.ts <botA> <botB> [partidas]   (bots: easy, normal, hard, greedy)
+ * Uso: pnpm exec tsx scripts/duel.ts <botA> <botB> [partidas]   (bots: easy, normal, hard, greedy)
  */
 import { applyAction, BOTS, createGame, greedyBot } from '../src';
 import type { Bot } from '../src';

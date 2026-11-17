@@ -1,0 +1,10 @@
+packages:
+  - 'packages/*'
+  - 'apps/*'
+
+# Una versión tiene que llevar 7 días publicada (en minutos) antes de poder instalarse.
+minimumReleaseAge: 10080
+
+# Únicos paquetes autorizados a ejecutar scripts de instalación.
+allowBuilds:
+  esbuild: true

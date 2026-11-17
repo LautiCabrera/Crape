@@ -1,6 +1,6 @@
 /**
  * Simula partidas completas entre dos bots y mide con qué frecuencia se agota el mazo.
- * Uso: npm run simulate -- [partidas] [mazos]
+ * Uso: pnpm simulate [partidas] [mazos]
  */
 import { applyAction, createGame, greedyBot } from '../src';
 import { nextRandom } from '../src/rng';
